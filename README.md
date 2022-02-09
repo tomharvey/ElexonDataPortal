@@ -146,6 +146,7 @@ The following table describes the data streams that are currently retreivable th
 | B1830                  | Cross-border Balancing Energy Activated                        |
 | BOD                    | Bid Offer Level Data                                           |
 | CDN                    | Credit Default Notice Data                                     |
+| DERSYSDATA             | Derived System Data                                            |
 | DETSYSPRICES           | Detailed System Prices                                         |
 | DEVINDOD               | Daily Energy Volume Data                                       |
 | DISBSAD                | Balancing Services Adjustment Action Data                      |
