@@ -36,6 +36,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -e .
       - name: Run unit tests
+        env:
+          BMRS_API_KEY: ${{ secrets.BMRS_API_KEY }}
         run: |
           # install pytest
           pip install pytest
