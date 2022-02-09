@@ -1334,3 +1334,26 @@ def get_DERSYSDATA(
 
     return r
 
+
+def get_ROLSYSDEM(
+        APIKey='AP8DA23',
+        StartDate='2021-01-01',
+        EndDate='2021-01-02',
+        StartTime='00:00:00',
+        EndTime='23:59:59',
+        ServiceType='csv',
+        endpoint='https://api.bmreports.com/BMRS/ROLSYSDEM/v1'
+):
+    """5.2.12 Rolling System Demand
+    """
+
+    params = {
+        'APIKey': APIKey,
+        'FromDateTime': f'{StartDate} {StartTime}',
+        'ToDateTime': f'{EndDate} {EndTime}',
+        'ServiceType': ServiceType,
+    }
+
+    r = requests.get(endpoint, params=params)
+
+    return r
