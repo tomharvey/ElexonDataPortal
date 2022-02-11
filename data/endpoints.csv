@@ -941,3 +941,7 @@ LOLPDRM,Loss of Load Probability and De-rated Margin,1,get,request,APIKey,String
 LOLPDRM,Loss of Load Probability and De-rated Margin,1,get,request,FromSettlementDate,String,,No,YYYY-MM-DD,01/01/2021,Transmission
 LOLPDRM,Loss of Load Probability and De-rated Margin,1,get,request,ToSettlementDate,String,,No,YYYY-MM-DD,01/02/2021,Transmission
 LOLPDRM,Loss of Load Probability and De-rated Margin,1,get,request,ServiceType,String,,No,,csv/xml,Transmission
+DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,APIKey,String,,Yes,,AP8DA23,Balancing
+DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,FromSettlementDate,String,,No,YYYY-MM-DD,01/01/2021,Balancing
+DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,ToSettlementDate,String,,No,YYYY-MM-DD,01/02/2021,Balancing
+DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,ServiceType,String,,No,,csv/xml,Balancing
