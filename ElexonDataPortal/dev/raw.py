@@ -877,6 +877,28 @@ def get_CDN(
     return r
 
 
+def get_DERSYSDATA(
+    APIKey='AP8DA23',
+    FromSettlementDate='2021-01-01',
+    ToSettlementDate='2021-01-02',
+    ServiceType='csv',
+    endpoint='https://api.bmreports.com/BMRS/DERSYSDATA/v1'
+):
+    """5.2.43 Derived System Wide Data
+    """
+    
+    params = { 
+        'APIKey': APIKey,
+        'FromSettlementDate': FromSettlementDate,
+        'ToSettlementDate': ToSettlementDate,
+        'ServiceType': ServiceType,
+    }
+    
+    r = requests.get(endpoint, params=params)
+    
+    return r
+
+
 def get_DETSYSPRICES(
     APIKey='AP8DA23',
     SettlementDate='2014-01-02',
