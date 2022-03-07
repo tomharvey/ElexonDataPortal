@@ -15,7 +15,6 @@ def test_api_b1770():
 
 
 def test_api_dersysdata():
-
     client = Client()
 
     start_date = "2022-01-01"
@@ -25,3 +24,15 @@ def test_api_dersysdata():
 
     assert len(r) == 32 * 48
     # one for each SP in Janurary and on 1st Feb
+
+
+def test_api_rolsysdem():
+    client = Client()
+
+    start_date = "2022-02-01 00:00:00"
+    end_date = "2022-02-02 00:00:00"
+
+    r = client.get_ROLSYSDEM(FromDateTime=start_date, ToDateTime=end_date)
+
+    assert len(r) == 289
+    # one for each SP on 1st Feb and the very start of the 2nd Feb

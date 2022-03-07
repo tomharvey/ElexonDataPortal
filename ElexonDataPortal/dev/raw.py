@@ -1247,6 +1247,28 @@ def get_PHYBMDATA(
     return r
 
 
+def get_ROLSYSDEM(
+    APIKey='AP8DA23',
+    FromDateTime='2021-01-01 00:01:00',
+    ToDateTime='2021-02-01 23:59:00',
+    ServiceType='csv',
+    endpoint='https://api.bmreports.com/BMRS/ROLSYSDEM/v1'
+):
+    """5.2.12 Rolling System Demand
+    """
+    
+    params = { 
+        'APIKey': APIKey,
+        'FromDateTime': FromDateTime,
+        'ToDateTime': ToDateTime,
+        'ServiceType': ServiceType,
+    }
+    
+    r = requests.get(endpoint, params=params)
+    
+    return r
+
+
 def get_SYSDEM(
     APIKey='AP8DA23',
     FromDate='2021-01-01',
