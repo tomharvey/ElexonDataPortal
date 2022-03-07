@@ -35,4 +35,4 @@ def test_api_rolsysdem():
     r = client.get_ROLSYSDEM(FromDateTime=start_date, ToDateTime=end_date)
 
     assert len(r) == 289
-    # one for each SP in Janurary and on 1st Feb
+    # one for each SP on 1st Feb and the very start of the 2nd Feb

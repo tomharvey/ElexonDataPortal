@@ -1549,7 +1549,7 @@ class Client:
             n_attempts=self.n_retry_attempts,
             request_type='non_temporal',
             kwargs_map={},
-            func_params=['ServiceType', 'FromDateTime', 'ToDateTime'],
+            func_params=['APIKey', 'FromDateTime', 'ToDateTime', 'ServiceType'],
             FromDateTime=FromDateTime,
             ToDateTime=ToDateTime,
         )

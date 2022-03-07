@@ -2293,15 +2293,11 @@ paths:
       tags:
         - Demand
       parameters:
-        - name: "ServiceType"
+        - name: "APIKey"
           in: "query"
           schema:
             type: "string"
-          examples:
-            csv:
-              value: "csv"
-            xml:
-              value: "xml"
+          example: "AP8DA23"
         - name: "FromDateTime"
           in: "query"
           schema:

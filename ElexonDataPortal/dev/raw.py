@@ -1248,7 +1248,7 @@ def get_PHYBMDATA(
 
 
 def get_ROLSYSDEM(
-    ServiceType='csv',
+    APIKey='AP8DA23',
     FromDateTime='2021-01-01 00:01:00',
     ToDateTime='2021-02-01 23:59:00',
     ServiceType='csv',
@@ -1258,7 +1258,7 @@ def get_ROLSYSDEM(
     """
     
     params = { 
-        'ServiceType': ServiceType,
+        'APIKey': APIKey,
         'FromDateTime': FromDateTime,
         'ToDateTime': ToDateTime,
         'ServiceType': ServiceType,
