@@ -2286,6 +2286,49 @@ paths:
     servers:
       - url: "https://api.bmreports.com"
     
+  /BMRS/ROLSYSDEM/v1:
+    get:
+      x-title: "ROLSYSDEM"
+      description: "5.2.12 Rolling System Demand"
+      tags:
+        - Demand
+      parameters:
+        - name: "ServiceType"
+          in: "query"
+          schema:
+            type: "string"
+          examples:
+            csv:
+              value: "csv"
+            xml:
+              value: "xml"
+        - name: "FromDateTime"
+          in: "query"
+          schema:
+            type: "string"
+          example: "2021-01-01 00:01:00"
+        - name: "ToDateTime"
+          in: "query"
+          schema:
+            type: "string"
+          example: "2021-02-01 23:59:00"
+        - name: "ServiceType"
+          in: "query"
+          schema:
+            type: "string"
+          examples:
+            csv:
+              value: "csv"
+            xml:
+              value: "xml"
+      responses:
+        '200':
+          description: "5.2.12 Rolling System Demand"
+      servers:
+        - url: "https://api.bmreports.com"
+    servers:
+      - url: "https://api.bmreports.com"
+    
   /BMRS/SYSDEM/v1:
     get:
       x-title: "SYSDEM"

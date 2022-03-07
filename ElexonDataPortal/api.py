@@ -1528,33 +1528,34 @@ class Client:
         )
         
         return df
-
-
+    
+    
     def get_ROLSYSDEM(
-            self,
-            start_date: str = '2020-01-01',
-            end_date: str = '2020-01-07',
+        self,
+        FromDateTime: str='2021-01-01 00:01:00',
+        ToDateTime: str='2021-02-01 23:59:00',
     ):
         """
         5.2.12 Rolling System Demand
-
+        
         Parameters:
-            start_date (str)
-            end_date (str)
+            FromDateTime (str)
+            ToDateTime (str)
         """
-
+        
         df = orchestrator.query_orchestrator(
             method='get_ROLSYSDEM',
             api_key=self.api_key,
             n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            request_type='non_temporal',
+            kwargs_map={},
+            func_params=['ServiceType', 'FromDateTime', 'ToDateTime'],
+            FromDateTime=FromDateTime,
+            ToDateTime=ToDateTime,
         )
-
+        
         return df
+    
     
     def get_SYSDEM(
         self,

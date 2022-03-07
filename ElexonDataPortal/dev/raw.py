@@ -1247,6 +1247,28 @@ def get_PHYBMDATA(
     return r
 
 
+def get_ROLSYSDEM(
+    ServiceType='csv',
+    FromDateTime='2021-01-01 00:01:00',
+    ToDateTime='2021-02-01 23:59:00',
+    ServiceType='csv',
+    endpoint='https://api.bmreports.com/BMRS/ROLSYSDEM/v1'
+):
+    """5.2.12 Rolling System Demand
+    """
+    
+    params = { 
+        'ServiceType': ServiceType,
+        'FromDateTime': FromDateTime,
+        'ToDateTime': ToDateTime,
+        'ServiceType': ServiceType,
+    }
+    
+    r = requests.get(endpoint, params=params)
+    
+    return r
+
+
 def get_SYSDEM(
     APIKey='AP8DA23',
     FromDate='2021-01-01',
@@ -1332,50 +1354,5 @@ def get_WINDFORFUELHH(
     
     r = requests.get(endpoint, params=params)
     
-    return r
-
-def get_DERSYSDATA(
-        APIKey='AP8DA23',
-        FromSettlementDate='2021-01-01',
-        ToSettlementDate='2021-01-01',
-        ServiceType='csv',
-        endpoint='https://api.bmreports.com/BMRS/DERSYSDATA/v1'
-):
-    """5.2.43 Derived System Wide Data
-    """
-
-    params = {
-        'APIKey': APIKey,
-        'FromSettlementDate': FromSettlementDate,
-        'ToSettlementDate': ToSettlementDate,
-        'ServiceType': ServiceType,
-    }
-
-    r = requests.get(endpoint, params=params)
-
-    return r
-
-
-def get_ROLSYSDEM(
-        APIKey='AP8DA23',
-        StartDate='2021-01-01',
-        EndDate='2021-01-02',
-        StartTime='00:00:00',
-        EndTime='23:59:59',
-        ServiceType='csv',
-        endpoint='https://api.bmreports.com/BMRS/ROLSYSDEM/v1'
-):
-    """5.2.12 Rolling System Demand
-    """
-
-    params = {
-        'APIKey': APIKey,
-        'FromDateTime': f'{StartDate} {StartTime}',
-        'ToDateTime': f'{EndDate} {EndTime}',
-        'ServiceType': ServiceType,
-    }
-
-    r = requests.get(endpoint, params=params)
-
     return r
 

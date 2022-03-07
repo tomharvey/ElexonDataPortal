@@ -945,3 +945,7 @@ DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,APIKey,String,,Yes,,AP8
 DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,FromSettlementDate,String,,No,YYYY-MM-DD,01/01/2021,Balancing
 DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,ToSettlementDate,String,,No,YYYY-MM-DD,01/02/2021,Balancing
 DERSYSDATA,5.2.43 Derived System Wide Data,1,get,request,ServiceType,String,,No,,csv/xml,Balancing
+ROLSYSDEM,5.2.12 Rolling System Demand,1,get,request,ServiceType,String,,No,,csv/xml,Demand
+ROLSYSDEM,5.2.12 Rolling System Demand,1,get,request,FromDateTime,String,,No,YYYY-MM-DD HH:MM:SS,01/01/2021 00:01,Demand
+ROLSYSDEM,5.2.12 Rolling System Demand,1,get,request,ToDateTime,String,,No,YYYY-MM-DD HH:MM:SS,02/01/2021 23:59,Demand
+ROLSYSDEM,5.2.12 Rolling System Demand,1,get,request,ServiceType,String,,No,,csv/xml,Demand
