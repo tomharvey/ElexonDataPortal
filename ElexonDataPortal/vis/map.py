@@ -14,7 +14,6 @@ import geopandas as gpd
 import os
 from tqdm import tqdm
 from jinja2 import Template
-from warnings import warn
 
 from ..dev import utils, raw
 

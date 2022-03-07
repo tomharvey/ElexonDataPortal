@@ -1066,36 +1066,35 @@ class Client:
         )
         
         return df
-
+    
+    
     def get_DERSYSDATA(
-            self,
-            start_date: str = '2020-01-01',
-            end_date: str = '2020-01-01 1:30',
+        self,
+        start_date: str='2020-01-01', 
+        end_date: str='2020-01-07',
     ):
         """
         5.2.43 Derived System Wide Data
-
-        Note that the whole day is collected,
-        but its very quick compared to B1770.
-
+        
         Parameters:
             start_date (str)
             end_date (str)
         """
-
+        
         df = orchestrator.query_orchestrator(
             method='get_DERSYSDATA',
             api_key=self.api_key,
             n_attempts=self.n_retry_attempts,
             request_type='date_range',
             kwargs_map={'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate'},
-            func_params=['APIKey', 'start_date', 'end_date'],
+            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
             start_date=start_date,
             end_date=end_date,
         )
-
+        
         return df
-
+    
+    
     def get_DETSYSPRICES(
         self,
         start_date: str='2020-01-01', 
@@ -1175,6 +1174,7 @@ class Client:
         )
         
         return df
+    
     
     def get_FORDAYDEM(
         self,

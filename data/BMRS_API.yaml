@@ -1605,6 +1605,45 @@ paths:
     servers:
       - url: "https://api.bmreports.com"
     
+  /BMRS/DERSYSDATA/v1:
+    get:
+      x-title: "DERSYSDATA"
+      description: "5.2.43 Derived System Wide Data"
+      tags:
+        - Balancing
+      parameters:
+        - name: "APIKey"
+          in: "query"
+          schema:
+            type: "string"
+          example: "AP8DA23"
+        - name: "FromSettlementDate"
+          in: "query"
+          schema:
+            type: "string"
+          example: "2021-01-01"
+        - name: "ToSettlementDate"
+          in: "query"
+          schema:
+            type: "string"
+          example: "2021-01-02"
+        - name: "ServiceType"
+          in: "query"
+          schema:
+            type: "string"
+          examples:
+            csv:
+              value: "csv"
+            xml:
+              value: "xml"
+      responses:
+        '200':
+          description: "5.2.43 Derived System Wide Data"
+      servers:
+        - url: "https://api.bmreports.com"
+    servers:
+      - url: "https://api.bmreports.com"
+    
   /BMRS/DETSYSPRICES/v1:
     get:
       x-title: "DETSYSPRICES"

@@ -23,6 +23,12 @@ def get_curtailed_wfs_df(
     if wf_ids is None:
         wf_ids = get_wf_ids(dictionary_url=dictionary_url)
 
+    if isinstance(start_date, str):
+        start_date = pd.to_datetime(start_date).tz_localize('Europe/London')
+
+    if isinstance(end_date, str):
+        end_date = pd.to_datetime(end_date).tz_localize('Europe/London')
+
     client = Client()
     df_detsysprices = client.get_DETSYSPRICES(start_date, end_date)
 
@@ -35,6 +41,12 @@ def get_curtailed_wfs_df(
                         .reset_index()
                         .pivot('local_datetime', 'id', 'bidVolume')
                        )
+
+    df_curtailed_wfs = df_curtailed_wfs.reindex(pd.date_range(min(start_date, df_curtailed_wfs.index.min()),
+                                                              max(end_date-pd.Timedelta(minutes=30), df_curtailed_wfs.index.max()),
+                                                              tz='Europe/London'))
+
+    df_curtailed_wfs.index.name = 'local_datetime'
 
     return df_curtailed_wfs
 

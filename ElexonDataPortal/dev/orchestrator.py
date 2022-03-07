@@ -109,7 +109,7 @@ def handle_capping(
                 kwargs['start_time'] = '00:00'
 
             if pd.to_datetime(start_date) >= pd.to_datetime(end_date):
-                warn(f'The `end_date` ({end_date}) was earlier than `start_date` ({start_date})\nThe `start_date` will be set one day earlier than the `end_date`.')
+                warnings.warn(f'The `end_date` ({end_date}) was earlier than `start_date` ({start_date})\nThe `start_date` will be set one day earlier than the `end_date`.')
                 start_date = (pd.to_datetime(end_date) - pd.Timedelta(days=1)).strftime('%Y-%m-%d')
 
             warn(f'Response was capped, request is rerunning for missing data from {start_date}')
