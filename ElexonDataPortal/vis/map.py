@@ -13,7 +13,6 @@ import geopandas as gpd
 
 import os
 from tqdm import tqdm
-from warnings import warn
 from jinja2 import Template
 
 from ..dev import utils, raw

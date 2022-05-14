@@ -1003,11 +1003,11 @@ class Client:
         self,
         start_date: str='2020-01-01', 
         end_date: str='2020-01-01 1:30',
-        BMUnitId: str='2__AEENG000, G, E.ON Energy, Solutions Limited, EAS-EST01',
-        BMUnitType: str='G, S, E, I, T, etc',
-        LeadPartyName: str='AES New Energy Limited',
-        NGCBMUnit: str='EAS-ASP01, AES New Energy Limited, G, 2__AAEPD000',
-        Name: str='2__AAEPD000',
+        BMUnitId: str='*',
+        BMUnitType: str='*',
+        LeadPartyName: str='*',
+        NGCBMUnit: str='*',
+        Name: str='*',
     ):
         """
         Bid Offer Level Data

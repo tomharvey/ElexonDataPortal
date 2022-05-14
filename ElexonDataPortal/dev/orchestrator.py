@@ -77,7 +77,7 @@ def SP_and_date_request(
         r = retry_request(raw, method, kwargs, n_attempts=n_attempts)
 
         df_SP = utils.parse_xml_response(r)
-        df = pd.concat([df, df_SP])
+        df = df.append(df_SP)
 
     df = utils.expand_cols(df)
     df = if_possible_parse_local_datetime(df)

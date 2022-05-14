@@ -44,7 +44,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -83,7 +83,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -547,7 +547,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -693,7 +693,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -732,7 +732,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ProcessType"
           in: "query"
           schema:
@@ -972,7 +972,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "NGCBMUnitID"
           in: "query"
           schema:
@@ -1016,7 +1016,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1055,7 +1055,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1094,7 +1094,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1133,7 +1133,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1172,7 +1172,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1211,7 +1211,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1250,7 +1250,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1289,7 +1289,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1328,7 +1328,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1406,7 +1406,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1445,7 +1445,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1484,7 +1484,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "1"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -1523,32 +1523,32 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "12"
+          example: "*"
         - name: "BMUnitId"
           in: "query"
           schema:
             type: "string"
-          example: "2__AEENG000, G, E.ON Energy, Solutions Limited, EAS-EST01"
+          example: "*"
         - name: "BMUnitType"
           in: "query"
           schema:
             type: "string"
-          example: "G, S, E, I, T, etc"
+          example: "*"
         - name: "LeadPartyName"
           in: "query"
           schema:
             type: "string"
-          example: "AES New Energy Limited"
+          example: "*"
         - name: "NGCBMUnit"
           in: "query"
           schema:
             type: "string"
-          example: "EAS-ASP01, AES New Energy Limited, G, 2__AAEPD000"
+          example: "*"
         - name: "Name"
           in: "query"
           schema:
             type: "string"
-          example: "2__AAEPD000"
+          example: "*"
         - name: "ServiceType"
           in: "query"
           schema:
@@ -2243,7 +2243,7 @@ paths:
           in: "query"
           schema:
             type: "string"
-          example: "12"
+          example: "*"
         - name: "BMUnitId"
           in: "query"
           schema:

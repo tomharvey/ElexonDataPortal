@@ -4,7 +4,7 @@ import requests
 def get_B0610(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B0610/v1'
 ):
@@ -26,7 +26,7 @@ def get_B0610(
 def get_B0620(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B0620/v1'
 ):
@@ -282,7 +282,7 @@ def get_B1030(
 def get_B1320(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1320/v1'
 ):
@@ -366,7 +366,7 @@ def get_B1420(
 def get_B1430(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1430/v1'
 ):
@@ -388,7 +388,7 @@ def get_B1430(
 def get_B1440(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ProcessType='Day Ahead',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1440/v1'
@@ -516,7 +516,7 @@ def get_B1540(
 def get_B1610(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     NGCBMUnitID='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1610/v2'
@@ -540,7 +540,7 @@ def get_B1610(
 def get_B1620(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1620/v1'
 ):
@@ -562,7 +562,7 @@ def get_B1620(
 def get_B1630(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1630/v1'
 ):
@@ -584,7 +584,7 @@ def get_B1630(
 def get_B1720(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1720/v1'
 ):
@@ -606,7 +606,7 @@ def get_B1720(
 def get_B1730(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1730/v1'
 ):
@@ -628,7 +628,7 @@ def get_B1730(
 def get_B1740(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1740/v1'
 ):
@@ -650,7 +650,7 @@ def get_B1740(
 def get_B1750(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1750/v1'
 ):
@@ -672,7 +672,7 @@ def get_B1750(
 def get_B1760(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1760/v1'
 ):
@@ -694,7 +694,7 @@ def get_B1760(
 def get_B1770(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1770/v1'
 ):
@@ -716,7 +716,7 @@ def get_B1770(
 def get_B1780(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1780/v1'
 ):
@@ -760,7 +760,7 @@ def get_B1790(
 def get_B1810(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1810/v1'
 ):
@@ -782,7 +782,7 @@ def get_B1810(
 def get_B1820(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1820/v1'
 ):
@@ -804,7 +804,7 @@ def get_B1820(
 def get_B1830(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    Period='1',
+    Period='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/B1830/v1'
 ):
@@ -826,12 +826,12 @@ def get_B1830(
 def get_BOD(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    SettlementPeriod='12',
-    BMUnitId='2__AEENG000, G, E.ON Energy, Solutions Limited, EAS-EST01',
-    BMUnitType='G, S, E, I, T, etc',
-    LeadPartyName='AES New Energy Limited',
-    NGCBMUnit='EAS-ASP01, AES New Energy Limited, G, 2__AAEPD000',
-    Name='2__AAEPD000',
+    SettlementPeriod='*',
+    BMUnitId='*',
+    BMUnitType='*',
+    LeadPartyName='*',
+    NGCBMUnit='*',
+    Name='*',
     ServiceType='csv',
     endpoint='https://api.bmreports.com/BMRS/BOD/v1'
 ):
@@ -1218,7 +1218,7 @@ def get_NONBM(
 def get_PHYBMDATA(
     APIKey='AP8DA23',
     SettlementDate='2021-01-01',
-    SettlementPeriod='12',
+    SettlementPeriod='*',
     BMUnitId='',
     BMUnitType='',
     LeadPartyName='',
