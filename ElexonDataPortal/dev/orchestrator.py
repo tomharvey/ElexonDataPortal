@@ -77,7 +77,7 @@ def SP_and_date_request(
         r = retry_request(raw, method, kwargs, n_attempts=n_attempts)
 
         df_SP = utils.parse_xml_response(r)
-        df = df.append(df_SP)
+        df = pd.concat([df, df_SP])
 
     df = utils.expand_cols(df)
     df = if_possible_parse_local_datetime(df)
@@ -124,7 +124,7 @@ def handle_capping(
                             **kwargs
                         )
 
-            df = df.append(df_rerun)
+            df = pd.concat([df, df_rerun])
             df = df.drop_duplicates()
 
         else:
@@ -224,7 +224,7 @@ def year_request(
         r = retry_request(raw, method, kwargs, n_attempts=n_attempts)
 
         df_year = utils.parse_xml_response(r)
-        df = df.append(df_year)
+        df = pd.concat([df, df_year])
 
     df = if_possible_parse_local_datetime(df)
 
@@ -278,7 +278,7 @@ def year_and_month_request(
         r = retry_request(raw, method, kwargs, n_attempts=n_attempts)
 
         df_year = utils.parse_xml_response(r)
-        df = df.append(df_year)
+        df = pd.concat([df, df_year])
 
     df = if_possible_parse_local_datetime(df)
 
@@ -345,7 +345,7 @@ def year_and_week_request(
         r = retry_request(raw, method, kwargs, n_attempts=n_attempts)
 
         df_year = utils.parse_xml_response(r)
-        df = df.append(df_year)
+        df = pd.concat([df, df_year])
 
     df = if_possible_parse_local_datetime(df)
 
