@@ -79,10 +79,10 @@ def parse_xml_response(r):
 
     if isinstance(data_content, list):
         df = expand_cols(pd.DataFrame(data_content))
-    elif isinstance(data_content, OrderedDict):
+    elif isinstance(data_content, OrderedDict) or isinstance(data_content, dict):
         df = pd.DataFrame(pd.Series(data_content)).T
     else:
-        raise ValueError('The returned `data_content` must be one of: `list` or `OrderedDict`')
+        raise ValueError('The returned `data_content` must be one of: `list`, `dict`, or `OrderedDict`')
 
     return df
 
