@@ -9,6 +9,7 @@ __all__ = ['retry_request', 'if_possible_parse_local_datetime', 'SP_and_date_req
 import pandas as pd
 from tqdm import tqdm
 from warnings import warn
+from typing import Optional
 from requests.models import Response
 
 from . import utils, raw
@@ -375,11 +376,12 @@ def query_orchestrator(
     method: str,
     api_key: str,
     request_type: str,
-    kwargs_map: dict=None,
-    func_params: list=None,
-    start_date: str=None,
-    end_date: str=None,
-    n_attempts: int=3,
+    kwargs_map: Optional[dict] = None,
+    func_params: Optional[list] = None,
+    start_date: Optional[str] = None,
+    end_date: Optional[str] = None,
+    n_attempts: int = 3,
+    non_local_tz: Optional[str] = None,
     **kwargs
 ):
     if request_type not in ['non_temporal']:
@@ -416,5 +418,9 @@ def query_orchestrator(
     )
 
     df = df.reset_index(drop=True)
+
+    if (non_local_tz is not None) and ('local_datetime' in df.columns):
+        df['datetime'] = pd.to_datetime(df['local_datetime'], utc=True).dt.tz_convert(non_local_tz)
+        df = df.drop(columns='local_datetime')
 
     return df

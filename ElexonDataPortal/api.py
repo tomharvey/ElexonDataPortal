@@ -1,14 +1,21 @@
 import os
+from typing import Optional
 from ElexonDataPortal.dev import orchestrator
 
 class Client:
-    def __init__(self, api_key: str=None, n_retry_attempts: int=3):
+    def __init__(
+        self, 
+        api_key: str = None, 
+        n_retry_attempts: int = 3,
+        non_local_tz: Optional[str] = None
+    ):
         if api_key is None:
             assert 'BMRS_API_KEY' in os.environ.keys(), 'If the `api_key` is not specified during client initialisation then it must be set to as the environment variable `BMRS_API_KEY`'
             api_key = os.environ['BMRS_API_KEY']
             
         self.api_key = api_key
         self.n_retry_attempts = n_retry_attempts
+        self.non_local_tz = non_local_tz
         
         self.set_method_descs()
         
@@ -23,8 +30,8 @@ class Client:
     
     def get_B0610(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Actual Total Load per Bidding Zone
@@ -35,14 +42,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0610',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0610',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -50,8 +58,8 @@ class Client:
     
     def get_B0620(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Day-Ahead Total Load Forecast per Bidding Zone
@@ -62,14 +70,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0620',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0620',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -77,8 +86,8 @@ class Client:
     
     def get_B0630(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-06-01',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-06-01',
     ):
         """
         Week-Ahead Total Load Forecast per Bidding Zone
@@ -89,14 +98,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0630',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year_and_week',
-            kwargs_map={'year': 'Year', 'week': 'Week'},
-            func_params=['APIKey', 'year', 'week', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0630',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year_and_week',
+            kwargs_map = {'year': 'Year', 'week': 'Week'},
+            func_params = ['APIKey', 'year', 'week', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -104,8 +114,8 @@ class Client:
     
     def get_B0640(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-06-01',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-06-01',
     ):
         """
         Month-Ahead Total Load Forecast Per Bidding Zone
@@ -116,14 +126,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0640',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year_and_month',
-            kwargs_map={'year': 'Year', 'month': 'Month'},
-            func_params=['APIKey', 'year', 'month', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0640',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year_and_month',
+            kwargs_map = {'year': 'Year', 'month': 'Month'},
+            func_params = ['APIKey', 'year', 'month', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -131,8 +142,8 @@ class Client:
     
     def get_B0650(
         self,
-        start_date: str='2019-01-01', 
-        end_date: str='2021-01-01',
+        start_date: str = '2019-01-01', 
+        end_date: str = '2021-01-01',
     ):
         """
         Year Ahead Total Load Forecast per Bidding Zone
@@ -143,14 +154,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0650',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year',
-            kwargs_map={'year': 'Year'},
-            func_params=['APIKey', 'year', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0650',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year',
+            kwargs_map = {'year': 'Year'},
+            func_params = ['APIKey', 'year', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -158,8 +170,8 @@ class Client:
     
     def get_B0710(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Planned Unavailability of Consumption Units
@@ -170,14 +182,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0710',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'end_time': 'EndTime', 'start_time': 'StartTime', 'start_date': 'StartDate', 'end_date': 'EndDate'},
-            func_params=['APIKey', 'end_time', 'start_time', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0710',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'end_time': 'EndTime', 'start_time': 'StartTime', 'start_date': 'StartDate', 'end_date': 'EndDate'},
+            func_params = ['APIKey', 'end_time', 'start_time', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -185,8 +198,8 @@ class Client:
     
     def get_B0720(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Changes In Actual Availability Of Consumption Units
@@ -197,14 +210,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0720',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'start_time': 'StartTime', 'end_date': 'EndDate', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'start_time', 'end_date', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0720',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'start_time': 'StartTime', 'end_date': 'EndDate', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'start_time', 'end_date', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -212,8 +226,8 @@ class Client:
     
     def get_B0810(
         self,
-        start_date: str='2019-01-01', 
-        end_date: str='2021-01-01',
+        start_date: str = '2019-01-01', 
+        end_date: str = '2021-01-01',
     ):
         """
         Year Ahead Forecast Margin
@@ -224,14 +238,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0810',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year',
-            kwargs_map={'year': 'Year'},
-            func_params=['APIKey', 'year', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0810',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year',
+            kwargs_map = {'year': 'Year'},
+            func_params = ['APIKey', 'year', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -239,8 +254,8 @@ class Client:
     
     def get_B0910(
         self,
-        start_date: str='2019-01-01', 
-        end_date: str='2021-01-01',
+        start_date: str = '2019-01-01', 
+        end_date: str = '2021-01-01',
     ):
         """
         Expansion and Dismantling Projects
@@ -251,14 +266,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B0910',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year',
-            kwargs_map={'year': 'Year'},
-            func_params=['APIKey', 'year', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B0910',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year',
+            kwargs_map = {'year': 'Year'},
+            func_params = ['APIKey', 'year', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -266,8 +282,8 @@ class Client:
     
     def get_B1010(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Planned Unavailability In The Transmission Grid
@@ -278,14 +294,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1010',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1010',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -293,8 +310,8 @@ class Client:
     
     def get_B1020(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Changes In Actual Availability In The Transmission Grid
@@ -305,14 +322,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1020',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1020',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -320,8 +338,8 @@ class Client:
     
     def get_B1030(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Changes In Actual Availability of Offshore Grid Infrastructure
@@ -332,14 +350,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1030',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1030',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -347,8 +366,8 @@ class Client:
     
     def get_B1320(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Congestion Management Measures Countertrading
@@ -359,14 +378,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1320',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1320',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -374,8 +394,8 @@ class Client:
     
     def get_B1330(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-06-01',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-06-01',
     ):
         """
         Congestion Management Measures Costs of Congestion Management
@@ -386,14 +406,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1330',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year_and_month',
-            kwargs_map={'year': 'Year', 'month': 'Month'},
-            func_params=['APIKey', 'year', 'month', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1330',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year_and_month',
+            kwargs_map = {'year': 'Year', 'month': 'Month'},
+            func_params = ['APIKey', 'year', 'month', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -401,8 +422,8 @@ class Client:
     
     def get_B1410(
         self,
-        start_date: str='2019-01-01', 
-        end_date: str='2021-01-01',
+        start_date: str = '2019-01-01', 
+        end_date: str = '2021-01-01',
     ):
         """
         Installed Generation Capacity Aggregated
@@ -413,14 +434,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1410',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year',
-            kwargs_map={'year': 'Year'},
-            func_params=['APIKey', 'year', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1410',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year',
+            kwargs_map = {'year': 'Year'},
+            func_params = ['APIKey', 'year', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -428,8 +450,8 @@ class Client:
     
     def get_B1420(
         self,
-        start_date: str='2019-01-01', 
-        end_date: str='2021-01-01',
+        start_date: str = '2019-01-01', 
+        end_date: str = '2021-01-01',
     ):
         """
         Installed Generation Capacity per Unit
@@ -440,14 +462,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1420',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year',
-            kwargs_map={'year': 'Year'},
-            func_params=['APIKey', 'year', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1420',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year',
+            kwargs_map = {'year': 'Year'},
+            func_params = ['APIKey', 'year', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -455,8 +478,8 @@ class Client:
     
     def get_B1430(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Day-Ahead Aggregated Generation
@@ -467,14 +490,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1430',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1430',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -482,8 +506,8 @@ class Client:
     
     def get_B1440(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
         ProcessType: str='Day Ahead',
     ):
         """
@@ -496,15 +520,16 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1440',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ProcessType', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            ProcessType=ProcessType,
+            method = 'get_B1440',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ProcessType', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            ProcessType = ProcessType,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -512,8 +537,8 @@ class Client:
     
     def get_B1510(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Planned Unavailability of Generation Units
@@ -524,14 +549,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1510',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1510',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -539,8 +565,8 @@ class Client:
     
     def get_B1520(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Changes In Actual Availability of Generation Units
@@ -551,14 +577,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1520',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1520',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -566,8 +593,8 @@ class Client:
     
     def get_B1530(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Planned Unavailability of Production Units
@@ -578,14 +605,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1530',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1530',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -593,8 +621,8 @@ class Client:
     
     def get_B1540(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Changes In Actual Availability of Production Units
@@ -605,14 +633,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1540',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_time_range',
-            kwargs_map={'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
-            func_params=['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1540',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_time_range',
+            kwargs_map = {'start_date': 'StartDate', 'end_date': 'EndDate', 'start_time': 'StartTime', 'end_time': 'EndTime'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'start_time', 'end_time', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -620,8 +649,8 @@ class Client:
     
     def get_B1610(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
         NGCBMUnitID: str='*',
     ):
         """
@@ -634,15 +663,16 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1610',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'NGCBMUnitID', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            NGCBMUnitID=NGCBMUnitID,
+            method = 'get_B1610',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'NGCBMUnitID', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            NGCBMUnitID = NGCBMUnitID,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -650,8 +680,8 @@ class Client:
     
     def get_B1620(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Actual Aggregated Generation per Type
@@ -662,14 +692,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1620',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1620',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -677,8 +708,8 @@ class Client:
     
     def get_B1630(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Actual Or Estimated Wind and Solar Power Generation
@@ -689,14 +720,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1630',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1630',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -704,8 +736,8 @@ class Client:
     
     def get_B1720(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Amount Of Balancing Reserves Under Contract Service
@@ -716,14 +748,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1720',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1720',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -731,8 +764,8 @@ class Client:
     
     def get_B1730(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Prices Of Procured Balancing Reserves Service
@@ -743,14 +776,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1730',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1730',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -758,8 +792,8 @@ class Client:
     
     def get_B1740(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Accepted Aggregated Offers
@@ -770,14 +804,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1740',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1740',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -785,8 +820,8 @@ class Client:
     
     def get_B1750(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Activated Balancing Energy
@@ -797,14 +832,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1750',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1750',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -812,8 +848,8 @@ class Client:
     
     def get_B1760(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Prices Of Activated Balancing Energy
@@ -824,14 +860,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1760',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1760',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -839,8 +876,8 @@ class Client:
     
     def get_B1770(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Imbalance Prices
@@ -851,14 +888,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1770',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1770',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -866,8 +904,8 @@ class Client:
     
     def get_B1780(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Aggregated Imbalance Volumes
@@ -878,14 +916,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1780',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1780',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -893,8 +932,8 @@ class Client:
     
     def get_B1790(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-06-01',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-06-01',
     ):
         """
         Financial Expenses and Income For Balancing
@@ -905,14 +944,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1790',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='year_and_month',
-            kwargs_map={'year': 'Year', 'month': 'Month'},
-            func_params=['APIKey', 'year', 'month', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1790',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'year_and_month',
+            kwargs_map = {'year': 'Year', 'month': 'Month'},
+            func_params = ['APIKey', 'year', 'month', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -920,8 +960,8 @@ class Client:
     
     def get_B1810(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Cross-Border Balancing Volumes of Exchanged Bids and Offers
@@ -932,14 +972,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1810',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1810',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -947,8 +988,8 @@ class Client:
     
     def get_B1820(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Cross-Border Balancing Prices
@@ -959,14 +1000,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1820',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1820',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -974,8 +1016,8 @@ class Client:
     
     def get_B1830(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Cross-border Balancing Energy Activated
@@ -986,14 +1028,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_B1830',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_B1830',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1001,8 +1044,8 @@ class Client:
     
     def get_BOD(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
         BMUnitId: str='*',
         BMUnitType: str='*',
         LeadPartyName: str='*',
@@ -1023,19 +1066,20 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_BOD',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
-            func_params=['APIKey', 'date', 'SP', 'BMUnitId', 'BMUnitType', 'LeadPartyName', 'NGCBMUnit', 'Name', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            BMUnitId=BMUnitId,
-            BMUnitType=BMUnitType,
-            LeadPartyName=LeadPartyName,
-            NGCBMUnit=NGCBMUnit,
-            Name=Name,
+            method = 'get_BOD',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
+            func_params = ['APIKey', 'date', 'SP', 'BMUnitId', 'BMUnitType', 'LeadPartyName', 'NGCBMUnit', 'Name', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            BMUnitId = BMUnitId,
+            BMUnitType = BMUnitType,
+            LeadPartyName = LeadPartyName,
+            NGCBMUnit = NGCBMUnit,
+            Name = Name,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1055,14 +1099,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_CDN',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='non_temporal',
-            kwargs_map={},
-            func_params=['APIKey', 'FromClearedDate', 'ToClearedDate', 'ServiceType'],
-            FromClearedDate=FromClearedDate,
-            ToClearedDate=ToClearedDate,
+            method = 'get_CDN',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'non_temporal',
+            kwargs_map = {},
+            func_params = ['APIKey', 'FromClearedDate', 'ToClearedDate', 'ServiceType'],
+            FromClearedDate = FromClearedDate,
+            ToClearedDate = ToClearedDate,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1070,8 +1115,8 @@ class Client:
     
     def get_DERSYSDATA(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         5.2.43 Derived System Wide Data
@@ -1082,14 +1127,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_DERSYSDATA',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_DERSYSDATA',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1097,8 +1143,8 @@ class Client:
     
     def get_DETSYSPRICES(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Detailed System Prices
@@ -1109,14 +1155,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_DETSYSPRICES',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_DETSYSPRICES',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1124,8 +1171,8 @@ class Client:
     
     def get_DEVINDOD(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Daily Energy Volume Data
@@ -1136,14 +1183,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_DEVINDOD',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_DEVINDOD',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1151,8 +1199,8 @@ class Client:
     
     def get_DISBSAD(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
     ):
         """
         Balancing Services Adjustment Action Data
@@ -1163,14 +1211,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_DISBSAD',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
-            func_params=['APIKey', 'date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_DISBSAD',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
+            func_params = ['APIKey', 'date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1178,8 +1227,8 @@ class Client:
     
     def get_FORDAYDEM(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
         ZoneIdentifier: str='N',
     ):
         """
@@ -1192,15 +1241,16 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_FORDAYDEM',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'ZoneIdentifier', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            ZoneIdentifier=ZoneIdentifier,
+            method = 'get_FORDAYDEM',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'ZoneIdentifier', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            ZoneIdentifier = ZoneIdentifier,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1220,14 +1270,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_FREQ',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='non_temporal',
-            kwargs_map={},
-            func_params=['APIKey', 'FromDateTime', 'ToDateTime', 'ServiceType'],
-            FromDateTime=FromDateTime,
-            ToDateTime=ToDateTime,
+            method = 'get_FREQ',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'non_temporal',
+            kwargs_map = {},
+            func_params = ['APIKey', 'FromDateTime', 'ToDateTime', 'ServiceType'],
+            FromDateTime = FromDateTime,
+            ToDateTime = ToDateTime,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1235,8 +1286,8 @@ class Client:
     
     def get_FUELHH(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Half Hourly Outturn Generation by Fuel Type
@@ -1247,14 +1298,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_FUELHH',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_FUELHH',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1262,8 +1314,8 @@ class Client:
     
     def get_LOLPDRM(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Loss of Load Probability and De-rated Margin
@@ -1274,14 +1326,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_LOLPDRM',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_LOLPDRM',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1289,8 +1342,8 @@ class Client:
     
     def get_MELIMBALNGC(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
         ZoneIdentifier: str='N',
     ):
         """
@@ -1303,15 +1356,16 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_MELIMBALNGC',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'ZoneIdentifier', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            ZoneIdentifier=ZoneIdentifier,
+            method = 'get_MELIMBALNGC',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'ZoneIdentifier', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            ZoneIdentifier = ZoneIdentifier,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1319,8 +1373,8 @@ class Client:
     
     def get_MID(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Market Index Data
@@ -1331,14 +1385,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_MID',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate', 'SP': 'Period'},
-            func_params=['APIKey', 'start_date', 'end_date', 'SP', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_MID',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromSettlementDate', 'end_date': 'ToSettlementDate', 'SP': 'Period'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'SP', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1362,16 +1417,17 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_MessageDetailRetrieval',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='non_temporal',
-            kwargs_map={},
-            func_params=['APIKey', 'MessageId', 'ParticipantId', 'SequenceId', 'ActiveFlag', 'ServiceType'],
-            MessageId=MessageId,
-            ParticipantId=ParticipantId,
-            SequenceId=SequenceId,
-            ActiveFlag=ActiveFlag,
+            method = 'get_MessageDetailRetrieval',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'non_temporal',
+            kwargs_map = {},
+            func_params = ['APIKey', 'MessageId', 'ParticipantId', 'SequenceId', 'ActiveFlag', 'ServiceType'],
+            MessageId = MessageId,
+            ParticipantId = ParticipantId,
+            SequenceId = SequenceId,
+            ActiveFlag = ActiveFlag,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1409,23 +1465,24 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_MessageListRetrieval',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='non_temporal',
-            kwargs_map={},
-            func_params=['APIKey', 'EventStart', 'EventEnd', 'PublicationFrom', 'PublicationTo', 'ParticipantId', 'MessageID', 'AssetID', 'EventType', 'FuelType', 'MessageType', 'UnavailabilityType', 'ServiceType'],
-            EventStart=EventStart,
-            EventEnd=EventEnd,
-            PublicationFrom=PublicationFrom,
-            PublicationTo=PublicationTo,
-            ParticipantId=ParticipantId,
-            MessageID=MessageID,
-            AssetID=AssetID,
-            EventType=EventType,
-            FuelType=FuelType,
-            MessageType=MessageType,
-            UnavailabilityType=UnavailabilityType,
+            method = 'get_MessageListRetrieval',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'non_temporal',
+            kwargs_map = {},
+            func_params = ['APIKey', 'EventStart', 'EventEnd', 'PublicationFrom', 'PublicationTo', 'ParticipantId', 'MessageID', 'AssetID', 'EventType', 'FuelType', 'MessageType', 'UnavailabilityType', 'ServiceType'],
+            EventStart = EventStart,
+            EventEnd = EventEnd,
+            PublicationFrom = PublicationFrom,
+            PublicationTo = PublicationTo,
+            ParticipantId = ParticipantId,
+            MessageID = MessageID,
+            AssetID = AssetID,
+            EventType = EventType,
+            FuelType = FuelType,
+            MessageType = MessageType,
+            UnavailabilityType = UnavailabilityType,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1433,8 +1490,8 @@ class Client:
     
     def get_NETBSAD(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
         isTwoDayWindow: str='FALSE',
     ):
         """
@@ -1447,15 +1504,16 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_NETBSAD',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
-            func_params=['APIKey', 'date', 'SP', 'isTwoDayWindow', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            isTwoDayWindow=isTwoDayWindow,
+            method = 'get_NETBSAD',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
+            func_params = ['APIKey', 'date', 'SP', 'isTwoDayWindow', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            isTwoDayWindow = isTwoDayWindow,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1463,8 +1521,8 @@ class Client:
     
     def get_NONBM(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Non BM STOR Instructed Volume Data
@@ -1475,14 +1533,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_NONBM',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['start_date', 'end_date', 'APIKey', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_NONBM',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['start_date', 'end_date', 'APIKey', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1490,8 +1549,8 @@ class Client:
     
     def get_PHYBMDATA(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-01 1:30',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-01 1:30',
         BMUnitId: str='',
         BMUnitType: str='',
         LeadPartyName: str='',
@@ -1512,19 +1571,20 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_PHYBMDATA',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='SP_and_date',
-            kwargs_map={'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
-            func_params=['APIKey', 'date', 'SP', 'BMUnitId', 'BMUnitType', 'LeadPartyName', 'NGCBMUnit', 'Name', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
-            BMUnitId=BMUnitId,
-            BMUnitType=BMUnitType,
-            LeadPartyName=LeadPartyName,
-            NGCBMUnit=NGCBMUnit,
-            Name=Name,
+            method = 'get_PHYBMDATA',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'SP_and_date',
+            kwargs_map = {'date': 'SettlementDate', 'SP': 'SettlementPeriod'},
+            func_params = ['APIKey', 'date', 'SP', 'BMUnitId', 'BMUnitType', 'LeadPartyName', 'NGCBMUnit', 'Name', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            BMUnitId = BMUnitId,
+            BMUnitType = BMUnitType,
+            LeadPartyName = LeadPartyName,
+            NGCBMUnit = NGCBMUnit,
+            Name = Name,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1544,14 +1604,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_ROLSYSDEM',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='non_temporal',
-            kwargs_map={},
-            func_params=['APIKey', 'FromDateTime', 'ToDateTime', 'ServiceType'],
-            FromDateTime=FromDateTime,
-            ToDateTime=ToDateTime,
+            method = 'get_ROLSYSDEM',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'non_temporal',
+            kwargs_map = {},
+            func_params = ['APIKey', 'FromDateTime', 'ToDateTime', 'ServiceType'],
+            FromDateTime = FromDateTime,
+            ToDateTime = ToDateTime,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1559,8 +1620,8 @@ class Client:
     
     def get_SYSDEM(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         System Demand
@@ -1571,14 +1632,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_SYSDEM',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_SYSDEM',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1586,8 +1648,8 @@ class Client:
     
     def get_SYSWARN(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         System Warnings
@@ -1598,14 +1660,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_SYSWARN',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_SYSWARN',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1613,8 +1676,8 @@ class Client:
     
     def get_TEMP(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Temperature Data
@@ -1625,14 +1688,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_TEMP',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_TEMP',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
@@ -1640,8 +1704,8 @@ class Client:
     
     def get_WINDFORFUELHH(
         self,
-        start_date: str='2020-01-01', 
-        end_date: str='2020-01-07',
+        start_date: str = '2020-01-01', 
+        end_date: str = '2020-01-07',
     ):
         """
         Wind Generation Forecast and Out-turn Data
@@ -1652,14 +1716,15 @@ class Client:
         """
         
         df = orchestrator.query_orchestrator(
-            method='get_WINDFORFUELHH',
-            api_key=self.api_key,
-            n_attempts=self.n_retry_attempts,
-            request_type='date_range',
-            kwargs_map={'start_date': 'FromDate', 'end_date': 'ToDate'},
-            func_params=['APIKey', 'start_date', 'end_date', 'ServiceType'],
-            start_date=start_date,
-            end_date=end_date,
+            method = 'get_WINDFORFUELHH',
+            api_key = self.api_key,
+            n_attempts = self.n_retry_attempts,
+            request_type = 'date_range',
+            kwargs_map = {'start_date': 'FromDate', 'end_date': 'ToDate'},
+            func_params = ['APIKey', 'start_date', 'end_date', 'ServiceType'],
+            start_date = start_date,
+            end_date = end_date,
+            non_local_tz = self.non_local_tz
         )
         
         return df
