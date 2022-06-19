@@ -91,9 +91,12 @@ def dt_rng_to_SPs(
     start_date: pd.Timestamp,
     end_date: pd.Timestamp,
     freq: str='30T',
-    tz: str='Europe/London'
+    tz: str='UTC'
 ):
-    dt_rng = pd.date_range(start_date, end_date, freq=freq, tz=tz)
+    extended_start_date = pd.to_datetime(start_date) - pd.Timedelta(days=1)
+    extended_end_date = pd.to_datetime(end_date) + pd.Timedelta(days=1)
+    
+    dt_rng = pd.date_range(extended_start_date, extended_end_date, freq=freq, tz=tz)
 
     SPs = list((2*(dt_rng.hour + dt_rng.minute/60) + 1).astype(int))
     dt_strs = list(dt_rng.strftime('%Y-%m-%d'))
@@ -108,6 +111,12 @@ def dt_rng_to_SPs(
         SPs = (1 + 2*(dt_rng[dt_rng.date==dt] - pd.to_datetime(dt).tz_localize('Europe/London')).total_seconds()/(60*60)).astype(int)
 
         df_dates_SPs.loc[df_dates_SPs.index.date==dt, 'SP'] = SPs
+        
+    tz_label = tz.lower().replace('/', '_')
+    df_dates_SPs.index.name = f'datetime_{tz_label}'
+    df_dates_SPs['SP'] = df_dates_SPs['SP'].astype(int)
+    
+    df_dates_SPs = df_dates_SPs[start_date:end_date]
 
     return df_dates_SPs
 
