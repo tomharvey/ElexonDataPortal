@@ -15,7 +15,7 @@ The figures shown here are attempts to replicate the visualisations from [this p
 * Wind, solar and biomass provided 20% of demand in 2015, with a peak of 45%.
 * Prices have become more volatile and net demand is falling towards must-run nuclear.
 
-These figures will be updated on a weekly basis, the last update was at: 2023-01-30 17:35
+These figures will be updated on a weekly basis, the last update was at: 2023-01-30 18:40
 
 <br>
 
@@ -39,7 +39,7 @@ The figure shown here is reproduced from the work in [this paper](https://ayrton
 * In Britain the MOE has increased sharply since 2016, with a 0.67% price reduction per p.p. increase in RES penetration
 * Disaggregation of the MOE by fuel-type highlights key differences in the transition paths of Britain and Germany
 
-This figure will be updated on a weekly basis, the last update was at: 2023-01-30 17:35
+This figure will be updated on a weekly basis, the last update was at: 2023-01-30 18:40
 
 <br>
 
@@ -60,7 +60,7 @@ In each settlement period the system operator publishes the de-rated margin fore
 * At 1200 hours on each calendar day for all Settlement Periods for which Gate Closure has not yet passed and which occur within the current Operational Day or the following Operational Day; and
 * At eight, four, two and one hour(s) prior to the beginning of the Settlement Period to which the De-Rated Margin Forecast relates.
 
-These figures will be updated on an hourly basis, the last update was at: 2023-01-30 18:15
+These figures will be updated on an hourly basis, the last update was at: 2023-01-30 18:45
 
 <br>
 
